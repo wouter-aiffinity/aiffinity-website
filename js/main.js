@@ -338,3 +338,58 @@ const createScrollProgress = () => {
 console.log('%cAIffinity', 'font-size: 48px; font-weight: bold; background: linear-gradient(90deg, #4361EE 0%, #00B4D8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;');
 console.log('%cIntelligence should be engineered, not improvised.', 'font-size: 14px; color: #5A6B8A; font-style: italic;');
 console.log('%cWebsite built with precision. Interested in working with us? hello@aiffinity.com', 'font-size: 12px; color: #00B4D8;');
+
+// ===================================
+// Language Switching
+// ===================================
+document.addEventListener('DOMContentLoaded', () => {
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const currentPath = window.location.pathname;
+    
+    // Determine current language based on URL
+    const isNL = currentPath.includes('/nl/') || currentPath.endsWith('/nl') || currentPath.includes('index-nl');
+    const currentLang = isNL ? 'nl' : 'en';
+    
+    // Set active button
+    langButtons.forEach(btn => {
+        const btnLang = btn.getAttribute('data-lang');
+        if (btnLang === currentLang) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+        
+        // Add click handler
+        btn.addEventListener('click', () => {
+            const targetLang = btn.getAttribute('data-lang');
+            
+            if (targetLang === 'nl' && currentLang === 'en') {
+                // Switch to Dutch
+                window.location.href = '/nl/';
+            } else if (targetLang === 'en' && currentLang === 'nl') {
+                // Switch to English
+                window.location.href = '/';
+            }
+            
+            // Save preference
+            localStorage.setItem('preferredLanguage', targetLang);
+        });
+    });
+    
+    // Auto-redirect based on browser language (first visit only)
+    if (!localStorage.getItem('preferredLanguage')) {
+        const browserLang = navigator.language || navigator.userLanguage;
+        const isNLBrowser = browserLang.toLowerCase().startsWith('nl');
+        
+        // If Dutch browser but on English page, redirect
+        if (isNLBrowser && currentLang === 'en') {
+            localStorage.setItem('preferredLanguage', 'nl');
+            window.location.href = '/nl/';
+        }
+        // If non-Dutch browser but on Dutch page, redirect
+        else if (!isNLBrowser && currentLang === 'nl') {
+            localStorage.setItem('preferredLanguage', 'en');
+            window.location.href = '/';
+        }
+    }
+});

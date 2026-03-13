@@ -176,6 +176,40 @@ h1, h2, h3, h4, h5, h6 {
     transition: all var(--transition-fast);
 }
 
+/* === Language Toggle === */
+.language-toggle {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.25rem;
+    border-radius: 8px;
+    margin-left: var(--spacing-md);
+}
+
+.lang-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-family: var(--font-body);
+}
+
+.lang-btn:hover {
+    color: var(--color-white);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.lang-btn.active {
+    background: var(--color-secondary-accent);
+    color: var(--color-white);
+}
+
 /* === Hero Section === */
 .hero {
     position: relative;
@@ -1078,6 +1112,12 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 768px) {
     .mobile-menu-toggle {
         display: flex;
+    }
+    
+    .language-toggle {
+        position: absolute;
+        top: 15px;
+        right: 60px;
     }
     
     .nav-menu {
