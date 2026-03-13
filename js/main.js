@@ -225,6 +225,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // ===================================
 // Contact Form Handling
 // ===================================
+// DISABLED: Netlify Forms handles submission automatically
+// The form will work without JavaScript intervention
+/*
 const contactForm = document.getElementById('contactForm');
 
 contactForm.addEventListener('submit', (e) => {
@@ -247,6 +250,7 @@ contactForm.addEventListener('submit', (e) => {
     // Reset form
     contactForm.reset();
 });
+*/
 
 // ===================================
 // Initialize Neural Network Backgrounds
